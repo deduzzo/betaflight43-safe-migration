@@ -1,4 +1,4 @@
 /node_modules/
 /public/build/
-
+.idea/
 .DS_Store
