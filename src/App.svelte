@@ -9,7 +9,7 @@
 						'batch','led', 'resource', 'board', 'manufacturer' ]
 	let safeSections= ['rateprofile'];
 	let otherSections = ['profile']
-	let unsafeCommands= ['gyro_', 'acc_', 'dterm_', 'dyn_', 'rc_']
+	let unsafeCommands= ['gyro', 'acc', 'dterm', 'dyn', 'rc']
 	let newSafeCommand, newUnsafeCommand;
 	let snackbar = false;
 	let snackTest = ""
@@ -100,6 +100,9 @@
 
 </script>
 
+<svelte:head>
+	<title>Betaflight 4.3 safe Migrator - from @deduzzo -</title>
+</svelte:head>
 <MaterialApp>
 	<Snackbar class="flex-column" bind:active={snackbar} bottom center timeout={2000}>
 		{snackTest}
@@ -147,6 +150,7 @@
 				</Card>
 			</CardText>
 		</Card>
+		<div class="d-flex justify-center ma-5" style="font-size: 12px">DISCLAIMER: with the use of this tool everyone is required to MANUAL verification of the result produced. Given the variety of quads and flight controllers it is possible that the results produced are not 100% perfect. This tool gives an indication, and is to be considered as a work in progress. The creators DO NOT assume any responsibility for any malfunction, product damage or problem that may occur after its use.</div>
 		<div class="d-flex justify-center ma-5">Source on: <a href="https://github.com/deduzzo/betaflight43-safe-migration"> Github @deduzzo</a> </div>
 	</div>
 </MaterialApp>
