@@ -1,4 +1,4 @@
-# Betaflight 4.3 Safe Migrator
+# Betaflight 4.3 Safe Migrator Assistant
 
 This tool can be reached at the address: <br />
 ### https://bf43-safe-migration.robertodedomenico.it/
