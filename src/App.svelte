@@ -160,7 +160,7 @@
 						{/each}
 					</CardText>
 					<CardActions>
-						<TextField bind:value={newUnsafeSection} on:keypress={(ev) => {if (ev.code === 'Enter') addRemoveInArray('unsafeSections', newUnsafeSection,'add'); } } placeholder="Add Safe command" />
+						<TextField bind:value={newUnsafeSection} on:keypress={(ev) => {if (ev.code === 'Enter') addRemoveInArray('unsafeSections', newUnsafeSection,'add'); } } placeholder="Add Unsafe section" />
 						<Button on:click={() => addRemoveInArray('unsafeSections', newUnsafeSection,'add') } rounded outlined>Add</Button>
 					</CardActions>
 				</Card>
