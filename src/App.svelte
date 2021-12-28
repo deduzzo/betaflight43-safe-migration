@@ -106,6 +106,14 @@
 </script>
 
 <svelte:head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-3303696-10"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-3303696-10');
+	</script>
 	<title>Betaflight 4.3 safe Migrator - from @deduzzo -</title>
 </svelte:head>
 <MaterialApp>
