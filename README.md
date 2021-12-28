@@ -6,8 +6,8 @@ This tool can be reached at the address: <br />
 <br />Betaflight 4.3 introduces tons of improvements,
 including great improvements on pid tuning, filtering and new sliders.
 
-So therefore, the "diff all" command may produce unsafe values.
-Given the many improvements and changes, in this video by Chris Rosser
+So therefore, the "diff all" command may produce unsafe values. Given the many improvements and changes, in this video by <b>Chris Rosser</b> (thank you for the great work and for your very interesting videos
+)
 
 [![Watch the video](https://img.youtube.com/vi/0s4iJ5Vc-48/hqdefault.jpg)](https://youtu.be/0s4iJ5Vc-48)
 
