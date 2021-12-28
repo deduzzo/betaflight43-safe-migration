@@ -105,7 +105,7 @@
 		{snackTest}
 	</Snackbar>
 	<div class="pa-4">
-		<div class="d-flex justify-center ma-5"><h2>Betaflight 4.3 CLI Migrator v.0.1</h2></div>
+		<div class="d-flex justify-center ma-5"><h3>Betaflight 4.3 CLI Migrator v.0.1</h3></div>
 		<div class="d-flex justify-center ma-5">
 			<CodeMirror bind:editor {options} class="editor" />
 		</div>
@@ -147,6 +147,7 @@
 				</Card>
 			</CardText>
 		</Card>
+		<div class="d-flex justify-center ma-5">Source on: <a href="https://github.com/deduzzo/betaflight43-safe-migration"> Github @deduzzo</a> </div>
 	</div>
 </MaterialApp>
 
