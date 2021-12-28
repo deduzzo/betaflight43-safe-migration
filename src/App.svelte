@@ -53,6 +53,7 @@
 			let weAreInUnSafeSection = false;
 			for (let row of backupRows)
 			{
+				let originalRow = row;
 				row = row.toLowerCase().trim().replace("set ","");
 				if (!weAreInUnSafeSection)
 				{
@@ -80,14 +81,15 @@
 					if (safe !== false && !weAreInUnSafeSection)
 						safe = true;
 					if ((safe || safe === null) && !weAreInUnSafeSection)
-						out = out + "\n" + row + (safe ? (!row.startsWith('#') ?" #SAFE" :"") : " #TO_CHECK")
+						out = out + "\n" + originalRow + (safe ? (!row.startsWith('#') ?" #SAFE" :"") : " #TO_CHECK")
 					else if (!safe || weAreInUnSafeSection)
-						out+= "\n" + (!row.startsWith('#') ? ("# " + row + " #UNSAFE" + (weAreInUnSafeSection ? "_SECTION":"" )  + " !!") : row)
+						out+= "\n" + (!row.startsWith('#') ? ("# " + originalRow + " #UNSAFE" + (weAreInUnSafeSection ? "_SECTION":"" )  + " !!") : originalRow)
 				}
 				else out += "\n"
 			}
 			editor.setValue(out)
-			snackTest = "Completed!"
+			navigator.clipboard.writeText(out);
+			snackTest = "Completed! Copied to your clipboard."
 		}
 		snackbar = true;
 	}
