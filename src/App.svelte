@@ -82,7 +82,7 @@
 					if (safe && !weAreInUnSafeSection)
 						safe = true;
 					if ((safe || safe === null) && !weAreInUnSafeSection)
-						out = out + "\n" + originalRow + (safe ? (!row.startsWith('#') ?" #SAFE" :"") : " #TO_CHECK")
+						out = out + "\n" + originalRow + (safe ? (!row.startsWith('#') ?" #SAFE" :"") : " #TO_CHECK (maybe safe)")
 					else if (!safe || weAreInUnSafeSection) {
 						out += "\n" + (!row.startsWith('#') ? ("# " + originalRow + " #UNSAFE" + (weAreInUnSafeSection ? "_SECTION" : "") + " !!") : originalRow)
 						unsafeCount++;
