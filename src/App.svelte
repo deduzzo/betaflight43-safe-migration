@@ -45,6 +45,7 @@
 
 	const filterBackup = () => {
 		let out = "# STARTING PROCESS ";
+		let unsafeCount = 0;
 		backup = editor.getValue();
 		if (backup.length === 0)
 			snackTest = "Nothing to analyze"
@@ -78,18 +79,20 @@
 							safe = true;
 					}
 
-					if (safe !== false && !weAreInUnSafeSection)
+					if (safe && !weAreInUnSafeSection)
 						safe = true;
 					if ((safe || safe === null) && !weAreInUnSafeSection)
 						out = out + "\n" + originalRow + (safe ? (!row.startsWith('#') ?" #SAFE" :"") : " #TO_CHECK")
-					else if (!safe || weAreInUnSafeSection)
-						out+= "\n" + (!row.startsWith('#') ? ("# " + originalRow + " #UNSAFE" + (weAreInUnSafeSection ? "_SECTION":"" )  + " !!") : originalRow)
+					else if (!safe || weAreInUnSafeSection) {
+						out += "\n" + (!row.startsWith('#') ? ("# " + originalRow + " #UNSAFE" + (weAreInUnSafeSection ? "_SECTION" : "") + " !!") : originalRow)
+						unsafeCount++;
+					}
 				}
 				else out += "\n"
 			}
 			editor.setValue(out)
 			navigator.clipboard.writeText(out);
-			snackTest = "Completed! Copied to your clipboard."
+			snackTest = "Completed! "+ unsafeCount +" unsafe rows detected. Results copied to your clipboard."
 		}
 		snackbar = true;
 	}
