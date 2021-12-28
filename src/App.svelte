@@ -129,49 +129,49 @@
 			<Button class="d-flex flex-row" on:click={filterBackup}>Get BetaFlight 4.3 safe diff</Button>
 		</div>
 		<Card class="d-flex justify-center ma-5 pa-6" >
-			<div class="pl-4 pr-4 pt-3">
-				<span class="text-overline">Options</span>
+			<div class="">
+				<span class="text-overline">settings</span>
 			</div>
 			<CardText>
-				<Card class="d-flex ma-5" outlined>
+				<Card class="d-flex ma-2" outlined shaped>
 					<div class="pl-4 pr-4 pt-3">
-						<span class="text-overline">SAFE COMMANDS</span>
+						<span class="text-h6 light-green text-lighten-5 green-text">SAFE COMMANDS</span>
 					</div>
 					<CardText>
 							{#each safeCommands as safeCommand (safeCommand)}
-								<Chip label="{safeCommand}" on:close={() => addRemoveInArray('safe', safeCommand,'remove') } close size="small" class="ma-2 green-text">{safeCommand}</Chip>
+								<Chip label="{safeCommand}" on:close={() => addRemoveInArray('safe', safeCommand,'remove') } close size="large" class="ma-2 green-text light-green text-lighten-5 font-weight-bold">{safeCommand}</Chip>
 							{/each}
 					</CardText>
 					<CardActions>
-						<TextField bind:value={newSafeCommand} on:keypress={(ev) => {if (ev.code === 'Enter') addRemoveInArray('safe', newSafeCommand,'add'); } } placeholder="Add Safe command" />
+						<TextField bind:value={newSafeCommand} on:keypress={(ev) => {if (ev.code === 'Enter') addRemoveInArray('safe', newSafeCommand,'add'); } } placeholder="new SAFE command" />
 						<Button on:click={() => addRemoveInArray('safe', newSafeCommand,'add') } rounded outlined>Add</Button>
 					</CardActions>
 				</Card>
-				<Card class="d-flex ma-5" outlined>
+				<Card class="d-flex ma-2" outlined shaped>
 					<div class="pl-4 pr-4 pt-3">
-						<span class="text-overline red">UNSAFE COMMANDS</span>
+						<span class="text-h6 red yellow-text">UNSAFE COMMANDS</span>
 					</div>
 					<CardText>
 						{#each unsafeCommands as unsafeCommand (unsafeCommand)}
-							<Chip on:close={() => addRemoveInArray('unsafe', unsafeCommand,'remove') } close size="small" class="ma-2 red-text" >{unsafeCommand}</Chip>
+							<Chip on:close={() => addRemoveInArray('unsafe', unsafeCommand,'remove') } close size="large" class="ma-2 red yellow-text font-weight-bold" >{unsafeCommand}</Chip>
 						{/each}
 					</CardText>
 					<CardActions>
-						<TextField bind:value={newUnsafeCommand} on:keypress={(ev) => {if (ev.code === 'Enter') addRemoveInArray('unsafe', newUnsafeCommand,'add'); } } placeholder="Add Unsafe command" />
+						<TextField bind:value={newUnsafeCommand} on:keypress={(ev) => {if (ev.code === 'Enter') addRemoveInArray('unsafe', newUnsafeCommand,'add'); } } placeholder="new UNSAFE command" />
 						<Button on:click={() => addRemoveInArray('unsafe', newUnsafeCommand,'add') } rounded outlined>Add</Button>
 					</CardActions>
 				</Card>
-				<Card class="d-flex ma-5" outlined>
+				<Card class="d-flex ma-2" outlined shaped>
 					<div class="pl-4 pr-4 pt-3">
-						<span class="text-overline red">UNSAFE SECTIONS</span>
+						<span class="text-h6 red yellow-text">UNSAFE SECTIONS</span><br /><span class="ml-5 red-text">(rateprofile sections may be UNSAFE if you don't use new "ACTUAL" Rates)</span>
 					</div>
 					<CardText>
 						{#each unsafeSections as unsafeSection (unsafeSection)}
-							<Chip on:close={() => addRemoveInArray('unsafeSections', unsafeSection,'remove') } close size="small" class="ma-2 green-text">{unsafeSection}</Chip>
+							<Chip on:close={() => addRemoveInArray('unsafeSections', unsafeSection,'remove') } close size="large" class="red yellow-text font-weight-bold">{unsafeSection}</Chip>
 						{/each}
 					</CardText>
 					<CardActions>
-						<TextField bind:value={newUnsafeSection} on:keypress={(ev) => {if (ev.code === 'Enter') addRemoveInArray('unsafeSections', newUnsafeSection,'add'); } } placeholder="Add Unsafe section" />
+						<TextField bind:value={newUnsafeSection} on:keypress={(ev) => {if (ev.code === 'Enter') addRemoveInArray('unsafeSections', newUnsafeSection,'add'); } } placeholder="new UNSAFE section" />
 						<Button on:click={() => addRemoveInArray('unsafeSections', newUnsafeSection,'add') } rounded outlined>Add</Button>
 					</CardActions>
 				</Card>
