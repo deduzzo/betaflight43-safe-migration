@@ -29,4 +29,4 @@ npm install && npm run dev
 
 Navigate to [localhost:5000](http://localhost:5000). You should see your app running. 
 
-### DISCLAIMER: with the use of this tool everyone is required to MANUAL verification of the result produced. Given the variety of quads and flight controllers it is possible that the results produced are not 100% perfect. This tool gives an indication, and is to be considered as a work in progress. The creators DO NOT assume any responsibility for any malfunction, product damage or problem that may occur after its use
+### DISCLAIMER: with the use of this tool everyone is required to MANUALLY verify the produced result. Given the variety of quads and flight controllers it's possible that the results produced are not 100% perfect. This tool gives an indication, and is to be considered as a work in progress. The creators DO NOT assume any responsibility for any malfunction, product damage or problem that may occur after its use.
