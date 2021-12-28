@@ -4,13 +4,12 @@
 	import CodeMirror from "./index"
 	let editor;
 	let backup = "# -- paste results of 'diff all' here --"
-	let safeCommands= ['feature', 'beacon', 'map', 'serial', 'sbus', 'aux', 'min_check', 'max_check', 'blackbox', 'vtx',
-						'dshot','beeper','yaw_motors_reversed','small_angle','osd','debug_mode', 'name', 'idle_min_rpm',
-						'batch','led', 'resource', 'board', 'manufacturer' ]
-	let safeSections= ['rateprofile'];
-	let otherSections = ['profile']
-	let unsafeCommands= ['gyro', 'acc', 'dterm', 'dyn', 'rc']
-	let newSafeCommand, newUnsafeCommand;
+	let safeCommands = ['aux','beacon', 'blackbox','batch','board','debug_mode', 'dshot', 'beeper','feature' ,'led', 'map', 'max_check','min_check','osd','sbus'
+						,'serial', 'idle_min_rpm', 'manufacturer' ,'name','resource', 'small_angle','vtx','vtxtable','yaw_motors_reversed']
+	let unsafeSections= ['rateprofile'];
+	let otherSectionsAndSectionsEnder = ['profile', 'batch']
+	let unsafeCommands= ['acc', 'dterm', 'dyn', 'ff', 'gyro',  'rc']
+	let newSafeCommand, newUnsafeCommand, newUnsafeSection;
 	let snackbar = false;
 	let snackTest = ""
 	const addRemoveInArray = (from, thing, operation) =>
@@ -31,16 +30,17 @@
 						if (!safeCommands.includes(thing))
 							safeCommands = [...safeCommands,thing];
 					break;
-				case 'safeSection':
+				case 'unsafeSections':
 					if (operation === "remove")
-						safeSections = [...safeSections.filter(item => item !== thing)];
+						unsafeSections = [...unsafeSections.filter(item => item !== thing)];
 					else if (operation === "add")
-						if (!safeSections.includes(thing))
-							safeSections = [...safeSections,thing];
+						if (!unsafeSections.includes(thing))
+							unsafeSections = [...unsafeSections,thing];
 					break;
 			}
 		newUnsafeCommand = ""
 		newSafeCommand = ""
+		newUnsafeSection = ""
 	}
 
 	const filterBackup = () => {
@@ -50,19 +50,19 @@
 			snackTest = "Nothing to analyze"
 		else {
 			let backupRows = backup.split('\n')
-			let weAreInSafeSection = false;
+			let weAreInUnSafeSection = false;
 			for (let row of backupRows)
 			{
 				row = row.toLowerCase().trim().replace("set ","");
-				if (!weAreInSafeSection)
+				if (!weAreInUnSafeSection)
 				{
-					if (safeSections.some(command => row.startsWith(command)))
-						weAreInSafeSection = true;
+					if (unsafeSections.some(command => row.startsWith(command)))
+						weAreInUnSafeSection = true;
 				}
 				else {
-					if (otherSections.some(command => row.startsWith(command)))
-						if (!safeSections.some(command => row.startsWith(command)))
-							weAreInSafeSection = false;
+					if (otherSectionsAndSectionsEnder.some(command => row.startsWith(command)))
+						if (!unsafeSections.some(command => row.startsWith(command)))
+							weAreInUnSafeSection = false;
 				}
 				if (row.length) {
 					let safe = null;
@@ -77,12 +77,12 @@
 							safe = true;
 					}
 
-					if (safe !== false && weAreInSafeSection)
+					if (safe !== false && !weAreInUnSafeSection)
 						safe = true;
-					if (safe || safe === null)
-						out = out + "\n" + row + (safe ? (!row.startsWith('#') ?" #SAFE" + (weAreInSafeSection ? "_SECTION":"" ) :"") : " #TO_CHECK")
-					else if (!safe)
-						out = out + "\n# " + row + " #UNSAFE!!"
+					if ((safe || safe === null) && !weAreInUnSafeSection)
+						out = out + "\n" + row + (safe ? (!row.startsWith('#') ?" #SAFE" :"") : " #TO_CHECK")
+					else if (!safe || weAreInUnSafeSection)
+						out+= "\n" + (!row.startsWith('#') ? ("# " + row + " #UNSAFE" + (weAreInUnSafeSection ? "_SECTION":"" )  + " !!") : row)
 				}
 				else out += "\n"
 			}
@@ -122,10 +122,24 @@
 			<CardText>
 				<Card class="d-flex ma-5" outlined>
 					<div class="pl-4 pr-4 pt-3">
+						<span class="text-overline">SAFE COMMANDS</span>
+					</div>
+					<CardText>
+							{#each safeCommands as safeCommand (safeCommand)}
+								<Chip label="{safeCommand}" on:close={() => addRemoveInArray('safe', safeCommand,'remove') } close size="small" class="ma-2 green-text">{safeCommand}</Chip>
+							{/each}
+					</CardText>
+					<CardActions>
+						<TextField bind:value={newSafeCommand} on:keypress={(ev) => {if (ev.code === 'Enter') addRemoveInArray('safe', newSafeCommand,'add'); } } placeholder="Add Safe command" />
+						<Button on:click={() => addRemoveInArray('safe', newSafeCommand,'add') } rounded outlined>Add</Button>
+					</CardActions>
+				</Card>
+				<Card class="d-flex ma-5" outlined>
+					<div class="pl-4 pr-4 pt-3">
 						<span class="text-overline red">UNSAFE COMMANDS</span>
 					</div>
 					<CardText>
-						{#each unsafeCommands as unsafeCommand}
+						{#each unsafeCommands as unsafeCommand (unsafeCommand)}
 							<Chip on:close={() => addRemoveInArray('unsafe', unsafeCommand,'remove') } close size="small" class="ma-2 red-text" >{unsafeCommand}</Chip>
 						{/each}
 					</CardText>
@@ -136,16 +150,16 @@
 				</Card>
 				<Card class="d-flex ma-5" outlined>
 					<div class="pl-4 pr-4 pt-3">
-						<span class="text-overline">SAFE COMMANDS</span>
+						<span class="text-overline red">UNSAFE SECTIONS</span>
 					</div>
 					<CardText>
-						{#each safeCommands as safeCommand}
-							<Chip on:close={() => addRemoveInArray('safe', safeCommand,'remove') } close size="small" class="ma-2 green-text">{safeCommand}</Chip>
+						{#each unsafeSections as unsafeSection (unsafeSection)}
+							<Chip on:close={() => addRemoveInArray('unsafeSections', unsafeSection,'remove') } close size="small" class="ma-2 green-text">{unsafeSection}</Chip>
 						{/each}
 					</CardText>
 					<CardActions>
-						<TextField bind:value={newSafeCommand} on:keypress={(ev) => {if (ev.code === 'Enter') addRemoveInArray('safe', newSafeCommand,'add'); } } placeholder="Add Safe command" />
-						<Button on:click={() => addRemoveInArray('safe', newSafeCommand,'add') } rounded outlined>Add</Button>
+						<TextField bind:value={newUnsafeSection} on:keypress={(ev) => {if (ev.code === 'Enter') addRemoveInArray('unsafeSections', newUnsafeSection,'add'); } } placeholder="Add Safe command" />
+						<Button on:click={() => addRemoveInArray('unsafeSections', newUnsafeSection,'add') } rounded outlined>Add</Button>
 					</CardActions>
 				</Card>
 			</CardText>
