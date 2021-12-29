@@ -1,4 +1,5 @@
 <script>
+	// cd public && npm run build && vercel deploy && vercel --prod
 	import {Snackbar, MaterialApp, Button, Chip, Card, CardActions, CardText, TextField} from 'svelte-materialify';
 	import 'codemirror/mode/python/python'
 	import CodeMirror from "./index"
