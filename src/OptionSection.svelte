@@ -18,7 +18,7 @@
     switch (type) {
         case 'safeCommands':
             _cssClass = "light-green text-lighten-5 green-text"
-            _caption = "SAFE Command";
+            _caption = "SAFE Commands";
             _store = safeCommands;
             safeCommands.subscribe(value => {
                 _values = value;
@@ -26,7 +26,7 @@
             break;
         case 'unsafeCommands':
             _cssClass = "red yellow-text"
-            _caption = "UNSAFE Command";
+            _caption = "UNSAFE Commands";
             _store = unsafeCommands;
             unsafeCommands.subscribe(value => {
                 _values = value;
@@ -34,7 +34,7 @@
             break;
         case 'unsafeSections':
             _cssClass = "red yellow-text"
-            _caption = "UNSAFE Section";
+            _caption = "UNSAFE Sections";
             _store = unsafeSections;
             unsafeSections.subscribe(value => {
                 _values = value;
