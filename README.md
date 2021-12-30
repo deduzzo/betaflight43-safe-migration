@@ -8,6 +8,7 @@
   
   This tool can be reached at the address: <br />
 ### https://bf43-safe-migration.robertodedomenico.it/
+  <br />
   
 <br />Betaflight 4.3 introduces tons of improvements, including great improvements on pid tuning, filtering and new sliders.
 
@@ -23,6 +24,11 @@ Just copy your result of "diff all" from a Betaflight <4.3 quad, and paste into 
 The tool analyze any command (the lists of safe and unsafe value are customizable using the options below) and produce as result a filtered version of your backup, simply by adding or commenting on each line that contains unsafe values.
 
 I used Svelte, that is a great tool for rapid developing and prototyping.
+
+                                        
+[![Watch the video](https://img.youtube.com/vi/8SyJQU778No/hqdefault.jpg)](https://youtu.be/8SyJQU778No)
+<br />Thank you to Chris for sharing my project in your Youtube Channel
+                                                       
 
 ## Building and running from source
 
