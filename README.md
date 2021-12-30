@@ -20,7 +20,7 @@ He advises (rightly) to make a selection of what is safe and what is insecure (o
 This tool was created precisely starting from his indications, it must be understood as a migration assistant to Betaflight 4.3.
 
 Just copy your result of "diff all" from a Betaflight <4.3 quad, and paste into the tool.
-The tool analyze any command (customizable using the options below) and produce as result a filtered version of your backup, simply by adding or commenting on each line that contains unsafe values.
+The tool analyze any command (the lists of safe and unsafe value are customizable using the options below) and produce as result a filtered version of your backup, simply by adding or commenting on each line that contains unsafe values.
 
 I used Svelte, that is a great tool for rapid developing and prototyping.
 
