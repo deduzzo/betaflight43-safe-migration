@@ -7,7 +7,7 @@
 	import OptionSection from "./OptionSection.svelte";
 	let editor;
 	let backup = "# -- paste results of 'diff all' here --\n\n"
-	let _otherSectionsAndSectionsEnder = ['profile', 'batch']
+	let _otherSectionsAndSectionsEnder = ['profile', 'batch','save']
 	let snackbar = false;
 	let snackTest = ""
 
